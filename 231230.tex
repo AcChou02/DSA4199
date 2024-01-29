@@ -1,0 +1,516 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Model 1},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Model 1}
+\author{}
+\date{\vspace{-2.5em}2023-12-30}
+
+\begin{document}
+\maketitle
+
+\hypertarget{data-preprocessing}{%
+\section{Data Preprocessing}\label{data-preprocessing}}
+
+\hypertarget{load-the-required-packages}{%
+\subsection{Load the required
+packages}\label{load-the-required-packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(quantmod)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(Hmisc)}
+\FunctionTok{library}\NormalTok{(moments)}
+\FunctionTok{library}\NormalTok{(reshape2)}
+\FunctionTok{library}\NormalTok{(fGarch)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{define-the-stock-symbol-and-date-range}{%
+\subsection{Define the stock symbol and date
+range}\label{define-the-stock-symbol-and-date-range}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tickers }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"AAPL"}\NormalTok{, }\StringTok{"AMGN"}\NormalTok{, }\StringTok{"AXP"}\NormalTok{, }\StringTok{"BA"}\NormalTok{, }\StringTok{"CAT"}\NormalTok{, }\StringTok{"CRM"}\NormalTok{, }\StringTok{"CSCO"}\NormalTok{, }\StringTok{"CVX"}\NormalTok{, }\StringTok{"DIS"}\NormalTok{, }\StringTok{"DOW"}\NormalTok{,}
+            \StringTok{"GS"}\NormalTok{, }\StringTok{"HD"}\NormalTok{, }\StringTok{"HON"}\NormalTok{, }\StringTok{"IBM"}\NormalTok{, }\StringTok{"INTC"}\NormalTok{, }\StringTok{"JNJ"}\NormalTok{, }\StringTok{"JPM"}\NormalTok{, }\StringTok{"KO"}\NormalTok{, }\StringTok{"MCD"}\NormalTok{, }\StringTok{"MMM"}\NormalTok{,}
+            \StringTok{"MRK"}\NormalTok{, }\StringTok{"MSFT"}\NormalTok{, }\StringTok{"NKE"}\NormalTok{, }\StringTok{"PG"}\NormalTok{, }\StringTok{"TRV"}\NormalTok{, }\StringTok{"UNH"}\NormalTok{, }\StringTok{"V"}\NormalTok{, }\StringTok{"VZ"}\NormalTok{, }\StringTok{"WBA"}\NormalTok{, }\StringTok{"WMT"}\NormalTok{)}
+\NormalTok{start\_date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2000{-}01{-}01"}\NormalTok{)}
+\NormalTok{end\_date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2020{-}12{-}31"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fetch-the-stock-prices}{%
+\subsection{Fetch the stock prices}\label{fetch-the-stock-prices}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(tickers, }\ControlFlowTok{function}\NormalTok{(ticker) \{}
+  \FunctionTok{getSymbols}\NormalTok{(ticker, }\AttributeTok{src =} \StringTok{\textquotesingle{}yahoo\textquotesingle{}}\NormalTok{, }\AttributeTok{from =}\NormalTok{ start\_date, }\AttributeTok{to =}\NormalTok{ end\_date, }\AttributeTok{auto.assign =} \ConstantTok{FALSE}\NormalTok{)[,}\DecValTok{6}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}} \FunctionTok{as\_tibble}\NormalTok{(}\FunctionTok{do.call}\NormalTok{(cbind, closing\_prices))}
+
+\NormalTok{date }\OtherTok{\textless{}{-}} \FunctionTok{index}\NormalTok{(}\FunctionTok{getSymbols}\NormalTok{(}\StringTok{"AAPL"}\NormalTok{, }\AttributeTok{src =} \StringTok{\textquotesingle{}yahoo\textquotesingle{}}\NormalTok{, }\AttributeTok{from =}\NormalTok{ start\_date, }\AttributeTok{to =}\NormalTok{ end\_date, }\AttributeTok{auto.assign =} \ConstantTok{FALSE}\NormalTok{))}
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(date, closing\_prices)}
+
+\CommentTok{\# Remove columns with NA \& clean column names}
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}}\NormalTok{ closing\_prices[ , }\FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(closing\_prices))}\SpecialCharTok{==}\DecValTok{0}\NormalTok{]}
+
+\FunctionTok{names}\NormalTok{(closing\_prices)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{substr}\NormalTok{(}\FunctionTok{names}\NormalTok{(closing\_prices)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{, }\FunctionTok{nchar}\NormalTok{(}\FunctionTok{names}\NormalTok{(closing\_prices)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \DecValTok{9}\NormalTok{)}
+
+\CommentTok{\# Calculate daily returns}
+\NormalTok{daily\_returns }\OtherTok{\textless{}{-}}\NormalTok{ closing\_prices }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{), }\SpecialCharTok{\textasciitilde{}}\FunctionTok{log}\NormalTok{(.) }\SpecialCharTok{{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{lag}\NormalTok{(.))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{na.omit}\NormalTok{()}
+
+\NormalTok{days }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(daily\_returns)}
+
+\NormalTok{daily\_returns\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(daily\_returns, }\AttributeTok{cols =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{names\_to =} \StringTok{"ticker"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"returns"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fit-individual-garch1-1-models}{%
+\subsection{\texorpdfstring{Fit Individual \(Garch(1, 1)\)
+Models}{Fit Individual Garch(1, 1) Models}}\label{fit-individual-garch1-1-models}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{garchFit}\NormalTok{(}\AttributeTok{data =}\NormalTok{ daily\_returns}\SpecialCharTok{$}\NormalTok{AAPL)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Series Initialization:
+##  ARMA Model:                arma
+##  Formula Mean:              ~ arma(0, 0)
+##  GARCH Model:               garch
+##  Formula Variance:          ~ garch(1, 1)
+##  ARMA Order:                0 0
+##  Max ARMA Order:            0
+##  GARCH Order:               1 1
+##  Max GARCH Order:           1
+##  Maximum Order:             1
+##  Conditional Dist:          norm
+##  h.start:                   2
+##  llh.start:                 1
+##  Length of Series:          5282
+##  Recursion Init:            mci
+##  Series Scale:              0.02656627
+## 
+## Parameter Initialization:
+##  Initial Parameters:          $params
+##  Limits of Transformations:   $U, $V
+##  Which Parameters are Fixed?  $includes
+##  Parameter Matrix:
+##                      U         V   params includes
+##     mu     -0.35946000   0.35946 0.035946     TRUE
+##     omega   0.00000100 100.00000 0.100000     TRUE
+##     alpha1  0.00000001   1.00000 0.100000     TRUE
+##     gamma1 -0.99999999   1.00000 0.100000    FALSE
+##     beta1   0.00000001   1.00000 0.800000     TRUE
+##     delta   0.00000000   2.00000 2.000000    FALSE
+##     skew    0.10000000  10.00000 1.000000    FALSE
+##     shape   1.00000000  10.00000 4.000000    FALSE
+##  Index List of Parameters to be Optimized:
+##     mu  omega alpha1  beta1 
+##      1      2      3      5 
+##  Persistence:                  0.9 
+## 
+## 
+## --- START OF TRACE ---
+## Selected Algorithm: nlminb 
+## 
+## R coded nlminb Solver: 
+## 
+##   0:     6713.5465: 0.0359460 0.100000 0.100000 0.800000
+##   1:     6632.1819: 0.0359479 0.0732812 0.103908 0.788065
+##   2:     6573.7504: 0.0359519 0.0641143 0.129782 0.798933
+##   3:     6572.1700: 0.0359564 0.0355571 0.136201 0.795078
+##   4:     6529.5706: 0.0359578 0.0457899 0.143315 0.802989
+##   5:     6512.7037: 0.0359631 0.0354150 0.151679 0.809336
+##   6:     6507.9226: 0.0359665 0.0359301 0.156529 0.815456
+##   7:     6503.9250: 0.0359720 0.0283751 0.155942 0.817410
+##   8:     6499.0180: 0.0359821 0.0291555 0.155925 0.825193
+##   9:     6495.7407: 0.0359943 0.0238199 0.153741 0.830476
+##  10:     6493.0350: 0.0360110 0.0236222 0.152025 0.838096
+##  11:     6490.7993: 0.0360359 0.0196201 0.148437 0.843744
+##  12:     6489.1960: 0.0360838 0.0189571 0.145261 0.850741
+##  13:     6488.1316: 0.0361962 0.0162154 0.141168 0.855959
+##  14:     6487.3450: 0.0364337 0.0165534 0.138712 0.859343
+##  15:     6483.3206: 0.0407997 0.0126065 0.112087 0.881903
+##  16:     6483.0926: 0.0453398 0.0163174 0.114242 0.878099
+##  17:     6480.6450: 0.0476102 0.0140277 0.115355 0.878767
+##  18:     6479.8280: 0.0522567 0.0126190 0.118023 0.880868
+##  19:     6479.0186: 0.0569031 0.0123433 0.119148 0.877359
+##  20:     6477.7137: 0.0615497 0.0139824 0.121493 0.875358
+##  21:     6477.1533: 0.0661968 0.0139119 0.123306 0.872870
+##  22:     6476.8128: 0.0708450 0.0144248 0.123651 0.872674
+##  23:     6476.5026: 0.0728698 0.0133701 0.116346 0.879335
+##  24:     6476.4566: 0.0749253 0.0134793 0.117169 0.878239
+##  25:     6476.4557: 0.0752963 0.0135066 0.117233 0.878115
+##  26:     6476.4557: 0.0752979 0.0135033 0.117237 0.878117
+##  27:     6476.4557: 0.0752961 0.0135039 0.117236 0.878116
+## 
+## Final Estimate of the Negative LLH:
+##  LLH:  -12687.24    norm LLH:  -2.401976 
+##           mu        omega       alpha1        beta1 
+## 2.000335e-03 9.530621e-06 1.172361e-01 8.781164e-01 
+## 
+## R-optimhess Difference Approximated Hessian Matrix:
+##                   mu         omega        alpha1        beta1
+## mu      -15555355.91 -2.901087e+08     -13027.48     -78771.0
+## omega  -290108670.70 -1.998809e+12 -342862207.50 -554947962.8
+## alpha1     -13027.48 -3.428622e+08    -123065.92    -156723.9
+## beta1      -78771.00 -5.549480e+08    -156723.95    -223024.7
+## attr(,"time")
+## Time difference of 0.099684 secs
+## 
+## --- END OF TRACE ---
+## 
+## 
+## Time to Estimate Parameters:
+##  Time difference of 0.4242692 secs
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(fit, }\AttributeTok{n.ahead =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{helper-functions}{%
+\subsection{Helper functions}\label{helper-functions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# function to fetch the correlation matrix given start and end dates}
+\NormalTok{get\_cor\_mat }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, start\_date, end\_date) \{}
+\NormalTok{  tmp }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=}\NormalTok{ start\_date, date }\SpecialCharTok{\textless{}=}\NormalTok{ end\_date)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{cor}\NormalTok{(tmp[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]))}
+\NormalTok{\}}
+
+\CommentTok{\# function to get 1{-}ahead prediction of standard deviation given start and end dates and ticker}
+\NormalTok{get\_volatility }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data\_long, stock, start\_date, end\_date) \{}
+\NormalTok{  tmp }\OtherTok{\textless{}{-}}\NormalTok{ data\_long }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=}\NormalTok{ start\_date, date }\SpecialCharTok{\textless{}=}\NormalTok{ end\_date, ticker }\SpecialCharTok{==}\NormalTok{ stock)}
+\NormalTok{  fit }\OtherTok{\textless{}{-}} \FunctionTok{garchFit}\NormalTok{(}\AttributeTok{formula =} \SpecialCharTok{\textasciitilde{}} \FunctionTok{garch}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{data =}\NormalTok{ tmp}\SpecialCharTok{$}\NormalTok{returns, }\AttributeTok{trace =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{  pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(fit, }\AttributeTok{n.ahead =} \DecValTok{1}\NormalTok{)}\SpecialCharTok{$}\NormalTok{standardDeviation[}\DecValTok{1}\NormalTok{]}
+  \FunctionTok{return}\NormalTok{(pred)}
+\NormalTok{\}}
+
+\NormalTok{start\_date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2001{-}01{-}01"}\NormalTok{)}
+\NormalTok{end\_date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2006{-}12{-}31"}\NormalTok{)}
+
+\CommentTok{\# vectorize function}
+\NormalTok{get\_volatility }\OtherTok{\textless{}{-}} \FunctionTok{Vectorize}\NormalTok{(get\_volatility, }\StringTok{"stock"}\NormalTok{)}
+\FunctionTok{get\_volatility}\NormalTok{(daily\_returns\_long, }\FunctionTok{unique}\NormalTok{(daily\_returns\_long}\SpecialCharTok{$}\NormalTok{ticker), start\_date, end\_date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        AAPL        AMGN         AXP          BA         CAT        CSCO 
+## 0.021770655 0.009304522 0.010235467 0.010833988 0.015992519 0.015588478 
+##         CVX         DIS          GS          HD         HON         IBM 
+## 0.012070254 0.010336475 0.014101826 0.012120004 0.012432628 0.008757381 
+##        INTC         JNJ         JPM          KO         MCD         MMM 
+## 0.014529733 0.006850448 0.009643489 0.007179513 0.009358722 0.009519643 
+##         MRK        MSFT         NKE          PG         TRV         UNH 
+## 0.017789722 0.010222299 0.010910117 0.006149691 0.011814974 0.013716950 
+##          VZ         WBA         WMT 
+## 0.008262505 0.014341081 0.010156915
+\end{verbatim}
+
+\hypertarget{model-1}{%
+\section{Model 1}\label{model-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# calculates the covariance matrix using model 1}
+\NormalTok{model\_1 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, start\_date, end\_date) \{}
+\NormalTok{  df\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(df, }\AttributeTok{cols =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{names\_to =} \StringTok{"ticker"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"returns"}\NormalTok{)}
+\NormalTok{  A }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\FunctionTok{get\_volatility}\NormalTok{(df\_long, }\FunctionTok{unique}\NormalTok{(df\_long}\SpecialCharTok{$}\NormalTok{ticker), start\_date, end\_date))}
+\NormalTok{  R }\OtherTok{\textless{}{-}} \FunctionTok{get\_cor\_mat}\NormalTok{(df, start\_date, end\_date)}
+  \FunctionTok{return}\NormalTok{(A }\SpecialCharTok{\%*\%}\NormalTok{ R }\SpecialCharTok{\%*\%}\NormalTok{ A)}
+\NormalTok{\}}
+
+\FunctionTok{model\_1}\NormalTok{(daily\_returns, start\_date, end\_date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               [,1]         [,2]         [,3]         [,4]         [,5]
+##  [1,] 4.739614e-04 5.418640e-05 7.797806e-05 5.014936e-05 1.127519e-04
+##  [2,] 5.418640e-05 8.657412e-05 3.652691e-05 3.030470e-05 4.613339e-05
+##  [3,] 7.797806e-05 3.652691e-05 1.047648e-04 4.812821e-05 7.770878e-05
+##  [4,] 5.014936e-05 3.030470e-05 4.812821e-05 1.173753e-04 6.985862e-05
+##  [5,] 1.127519e-04 4.613339e-05 7.770878e-05 6.985862e-05 2.557607e-04
+##  [6,] 1.518844e-04 4.643336e-05 7.041929e-05 4.747252e-05 8.006127e-05
+##  [7,] 4.830356e-05 2.594741e-05 3.979633e-05 3.546234e-05 6.777464e-05
+##  [8,] 7.506464e-05 3.206800e-05 5.967291e-05 4.574340e-05 7.122334e-05
+##  [9,] 1.257434e-04 5.103520e-05 9.228737e-05 6.123857e-05 1.147523e-04
+## [10,] 7.810434e-05 3.452395e-05 5.733975e-05 4.770306e-05 8.086159e-05
+## [11,] 8.869397e-05 3.351397e-05 6.702046e-05 7.103531e-05 9.685397e-05
+## [12,] 7.903342e-05 2.667590e-05 4.568183e-05 2.811188e-05 5.305751e-05
+## [13,] 1.546133e-04 4.705687e-05 7.100511e-05 5.265561e-05 8.763557e-05
+## [14,] 2.051282e-05 1.709542e-05 2.245840e-05 1.839776e-05 2.501125e-05
+## [15,] 7.386458e-05 3.280516e-05 6.432748e-05 4.105304e-05 7.758250e-05
+## [16,] 2.937474e-05 1.444953e-05 2.290607e-05 1.945344e-05 2.885620e-05
+## [17,] 3.496614e-05 1.264476e-05 2.876897e-05 2.777488e-05 3.625861e-05
+## [18,] 5.910882e-05 2.771733e-05 4.690294e-05 4.128742e-05 7.538939e-05
+## [19,] 5.197043e-05 5.227209e-05 4.755094e-05 4.054070e-05 5.578085e-05
+## [20,] 1.001894e-04 3.345450e-05 4.881230e-05 3.615793e-05 6.184518e-05
+## [21,] 6.276426e-05 2.033600e-05 4.177582e-05 3.262852e-05 5.492024e-05
+## [22,] 1.863535e-05 1.264412e-05 1.579378e-05 1.666928e-05 2.131482e-05
+## [23,] 5.579700e-05 2.929158e-05 5.426551e-05 4.366788e-05 7.241926e-05
+## [24,] 2.896014e-05 2.763153e-05 3.332301e-05 3.241824e-05 4.875706e-05
+## [25,] 4.560736e-05 2.176976e-05 3.493795e-05 2.348509e-05 3.784882e-05
+## [26,] 4.802386e-05 3.425640e-05 4.901039e-05 5.014937e-05 7.094048e-05
+## [27,] 6.356389e-05 2.898446e-05 4.837751e-05 4.125084e-05 6.088431e-05
+##               [,6]         [,7]         [,8]         [,9]        [,10]
+##  [1,] 1.518844e-04 4.830356e-05 7.506464e-05 1.257434e-04 7.810434e-05
+##  [2,] 4.643336e-05 2.594741e-05 3.206800e-05 5.103520e-05 3.452395e-05
+##  [3,] 7.041929e-05 3.979633e-05 5.967291e-05 9.228737e-05 5.733975e-05
+##  [4,] 4.747252e-05 3.546234e-05 4.574340e-05 6.123857e-05 4.770306e-05
+##  [5,] 8.006127e-05 6.777464e-05 7.122334e-05 1.147523e-04 8.086159e-05
+##  [6,] 2.430007e-04 2.647244e-05 6.393953e-05 1.182101e-04 6.415086e-05
+##  [7,] 2.647244e-05 1.456910e-04 3.207781e-05 4.551432e-05 3.472476e-05
+##  [8,] 6.393953e-05 3.207781e-05 1.068427e-04 7.891348e-05 5.441298e-05
+##  [9,] 1.182101e-04 4.551432e-05 7.891348e-05 1.988615e-04 7.782666e-05
+## [10,] 6.415086e-05 3.472476e-05 5.441298e-05 7.782666e-05 1.468945e-04
+## [11,] 8.013910e-05 4.297406e-05 6.424268e-05 8.796379e-05 6.218856e-05
+## [12,] 7.191445e-05 2.554080e-05 4.163105e-05 6.631312e-05 4.014554e-05
+## [13,] 1.439229e-04 3.381171e-05 6.488621e-05 1.109699e-04 7.133505e-05
+## [14,] 1.347537e-05 2.195461e-05 1.905817e-05 1.825882e-05 1.779564e-05
+## [15,] 7.012917e-05 3.800469e-05 5.039945e-05 9.148369e-05 5.217971e-05
+## [16,] 1.996350e-05 2.006349e-05 1.954114e-05 2.267643e-05 2.529510e-05
+## [17,] 3.367117e-05 2.186631e-05 2.771095e-05 3.829250e-05 3.230762e-05
+## [18,] 4.857164e-05 3.949648e-05 3.960059e-05 5.527860e-05 4.868329e-05
+## [19,] 3.545760e-05 5.269284e-05 4.005861e-05 5.379843e-05 4.476207e-05
+## [20,] 8.860815e-05 2.758214e-05 4.741098e-05 7.687917e-05 4.868856e-05
+## [21,] 5.231305e-05 2.837988e-05 3.856905e-05 5.359228e-05 5.068524e-05
+## [22,] 1.268388e-05 1.778732e-05 1.050507e-05 1.510912e-05 1.716833e-05
+## [23,] 5.413326e-05 4.023017e-05 4.150261e-05 6.977969e-05 5.054402e-05
+## [24,] 1.320775e-05 3.589741e-05 2.391626e-05 3.148491e-05 3.458168e-05
+## [25,] 4.165676e-05 2.754763e-05 3.571076e-05 4.404537e-05 2.984719e-05
+## [26,] 3.509013e-05 4.262751e-05 3.703294e-05 5.362472e-05 6.176724e-05
+## [27,] 5.179175e-05 2.656200e-05 4.138978e-05 6.034266e-05 7.223582e-05
+##              [,11]        [,12]        [,13]        [,14]        [,15]
+##  [1,] 8.869397e-05 7.903342e-05 1.546133e-04 2.051282e-05 7.386458e-05
+##  [2,] 3.351397e-05 2.667590e-05 4.705687e-05 1.709542e-05 3.280516e-05
+##  [3,] 6.702046e-05 4.568183e-05 7.100511e-05 2.245840e-05 6.432748e-05
+##  [4,] 7.103531e-05 2.811188e-05 5.265561e-05 1.839776e-05 4.105304e-05
+##  [5,] 9.685397e-05 5.305751e-05 8.763557e-05 2.501125e-05 7.758250e-05
+##  [6,] 8.013910e-05 7.191445e-05 1.439229e-04 1.347537e-05 7.012917e-05
+##  [7,] 4.297406e-05 2.554080e-05 3.381171e-05 2.195461e-05 3.800469e-05
+##  [8,] 6.424268e-05 4.163105e-05 6.488621e-05 1.905817e-05 5.039945e-05
+##  [9,] 8.796379e-05 6.631312e-05 1.109699e-04 1.825882e-05 9.148369e-05
+## [10,] 6.218856e-05 4.014554e-05 7.133505e-05 1.779564e-05 5.217971e-05
+## [11,] 1.545702e-04 5.083308e-05 7.757829e-05 2.098301e-05 6.151430e-05
+## [12,] 5.083308e-05 7.669173e-05 7.287980e-05 1.429353e-05 4.429649e-05
+## [13,] 7.757829e-05 7.287980e-05 2.111131e-04 1.731329e-05 6.750770e-05
+## [14,] 2.098301e-05 1.429353e-05 1.731329e-05 4.692864e-05 1.653692e-05
+## [15,] 6.151430e-05 4.429649e-05 6.750770e-05 1.653692e-05 9.299687e-05
+## [16,] 2.371660e-05 1.531922e-05 2.708111e-05 1.681384e-05 1.988778e-05
+## [17,] 2.699887e-05 1.848894e-05 2.664383e-05 1.178390e-05 2.246013e-05
+## [18,] 5.460094e-05 2.912853e-05 5.262015e-05 2.233756e-05 3.735453e-05
+## [19,] 4.694331e-05 3.300221e-05 4.638596e-05 4.562477e-05 4.656813e-05
+## [20,] 5.521528e-05 5.273451e-05 9.263887e-05 1.582788e-05 5.079475e-05
+## [21,] 4.254807e-05 2.967921e-05 4.612665e-05 1.324940e-05 3.643377e-05
+## [22,] 1.731266e-05 1.073233e-05 1.607516e-05 1.499584e-05 1.192147e-05
+## [23,] 5.778606e-05 3.222308e-05 5.280482e-05 1.638000e-05 5.248652e-05
+## [24,] 3.005987e-05 1.557297e-05 2.039252e-05 2.093545e-05 2.628098e-05
+## [25,] 3.370242e-05 2.965785e-05 4.069052e-05 1.624561e-05 3.537692e-05
+## [26,] 4.917107e-05 3.153064e-05 4.791875e-05 2.932673e-05 4.340738e-05
+## [27,] 4.779259e-05 3.442331e-05 5.570411e-05 1.732530e-05 4.348431e-05
+##              [,16]        [,17]        [,18]        [,19]        [,20]
+##  [1,] 2.937474e-05 3.496614e-05 5.910882e-05 5.197043e-05 1.001894e-04
+##  [2,] 1.444953e-05 1.264476e-05 2.771733e-05 5.227209e-05 3.345450e-05
+##  [3,] 2.290607e-05 2.876897e-05 4.690294e-05 4.755094e-05 4.881230e-05
+##  [4,] 1.945344e-05 2.777488e-05 4.128742e-05 4.054070e-05 3.615793e-05
+##  [5,] 2.885620e-05 3.625861e-05 7.538939e-05 5.578085e-05 6.184518e-05
+##  [6,] 1.996350e-05 3.367117e-05 4.857164e-05 3.545760e-05 8.860815e-05
+##  [7,] 2.006349e-05 2.186631e-05 3.949648e-05 5.269284e-05 2.758214e-05
+##  [8,] 1.954114e-05 2.771095e-05 3.960059e-05 4.005861e-05 4.741098e-05
+##  [9,] 2.267643e-05 3.829250e-05 5.527860e-05 5.379843e-05 7.687917e-05
+## [10,] 2.529510e-05 3.230762e-05 4.868329e-05 4.476207e-05 4.868856e-05
+## [11,] 2.371660e-05 2.699887e-05 5.460094e-05 4.694331e-05 5.521528e-05
+## [12,] 1.531922e-05 1.848894e-05 2.912853e-05 3.300221e-05 5.273451e-05
+## [13,] 2.708111e-05 2.664383e-05 5.262015e-05 4.638596e-05 9.263887e-05
+## [14,] 1.681384e-05 1.178390e-05 2.233756e-05 4.562477e-05 1.582788e-05
+## [15,] 1.988778e-05 2.246013e-05 3.735453e-05 4.656813e-05 5.079475e-05
+## [16,] 5.154541e-05 1.310901e-05 2.437242e-05 2.953402e-05 1.980614e-05
+## [17,] 1.310901e-05 8.758567e-05 2.490448e-05 2.643800e-05 1.914611e-05
+## [18,] 2.437242e-05 2.490448e-05 9.062360e-05 3.696993e-05 3.377452e-05
+## [19,] 2.953402e-05 2.643800e-05 3.696993e-05 3.164742e-04 4.085365e-05
+## [20,] 1.980614e-05 1.914611e-05 3.377452e-05 4.085365e-05 1.044954e-04
+## [21,] 1.773072e-05 2.106250e-05 3.483243e-05 2.369769e-05 3.137278e-05
+## [22,] 1.849846e-05 1.083934e-05 2.092003e-05 2.488274e-05 1.243445e-05
+## [23,] 2.046280e-05 3.289220e-05 4.351272e-05 3.999735e-05 3.941606e-05
+## [24,] 2.094195e-05 2.016515e-05 3.231808e-05 3.959321e-05 1.996861e-05
+## [25,] 1.729217e-05 1.723133e-05 2.325914e-05 3.686019e-05 3.414100e-05
+## [26,] 3.046085e-05 2.811872e-05 4.795274e-05 6.140995e-05 3.760746e-05
+## [27,] 2.150926e-05 2.647327e-05 4.119693e-05 3.971909e-05 4.469139e-05
+##              [,21]        [,22]        [,23]        [,24]        [,25]
+##  [1,] 6.276426e-05 1.863535e-05 5.579700e-05 2.896014e-05 4.560736e-05
+##  [2,] 2.033600e-05 1.264412e-05 2.929158e-05 2.763153e-05 2.176976e-05
+##  [3,] 4.177582e-05 1.579378e-05 5.426551e-05 3.332301e-05 3.493795e-05
+##  [4,] 3.262852e-05 1.666928e-05 4.366788e-05 3.241824e-05 2.348509e-05
+##  [5,] 5.492024e-05 2.131482e-05 7.241926e-05 4.875706e-05 3.784882e-05
+##  [6,] 5.231305e-05 1.268388e-05 5.413326e-05 1.320775e-05 4.165676e-05
+##  [7,] 2.837988e-05 1.778732e-05 4.023017e-05 3.589741e-05 2.754763e-05
+##  [8,] 3.856905e-05 1.050507e-05 4.150261e-05 2.391626e-05 3.571076e-05
+##  [9,] 5.359228e-05 1.510912e-05 6.977969e-05 3.148491e-05 4.404537e-05
+## [10,] 5.068524e-05 1.716833e-05 5.054402e-05 3.458168e-05 2.984719e-05
+## [11,] 4.254807e-05 1.731266e-05 5.778606e-05 3.005987e-05 3.370242e-05
+## [12,] 2.967921e-05 1.073233e-05 3.222308e-05 1.557297e-05 2.965785e-05
+## [13,] 4.612665e-05 1.607516e-05 5.280482e-05 2.039252e-05 4.069052e-05
+## [14,] 1.324940e-05 1.499584e-05 1.638000e-05 2.093545e-05 1.624561e-05
+## [15,] 3.643377e-05 1.192147e-05 5.248652e-05 2.628098e-05 3.537692e-05
+## [16,] 1.773072e-05 1.849846e-05 2.046280e-05 2.094195e-05 1.729217e-05
+## [17,] 2.106250e-05 1.083934e-05 3.289220e-05 2.016515e-05 1.723133e-05
+## [18,] 3.483243e-05 2.092003e-05 4.351272e-05 3.231808e-05 2.325914e-05
+## [19,] 2.369769e-05 2.488274e-05 3.999735e-05 3.959321e-05 3.686019e-05
+## [20,] 3.137278e-05 1.243445e-05 3.941606e-05 1.996861e-05 3.414100e-05
+## [21,] 1.190307e-04 1.027556e-05 3.380640e-05 1.786839e-05 2.165086e-05
+## [22,] 1.027556e-05 3.781869e-05 1.734876e-05 1.736628e-05 1.222900e-05
+## [23,] 3.380640e-05 1.734876e-05 1.395936e-04 3.925959e-05 3.131209e-05
+## [24,] 1.786839e-05 1.736628e-05 3.925959e-05 1.881547e-04 1.760475e-05
+## [25,] 2.165086e-05 1.222900e-05 3.131209e-05 1.760475e-05 6.826899e-05
+## [26,] 3.926768e-05 2.485398e-05 4.484437e-05 5.339394e-05 2.669801e-05
+## [27,] 4.189408e-05 1.725360e-05 4.199973e-05 2.967968e-05 3.098431e-05
+##              [,26]        [,27]
+##  [1,] 4.802386e-05 6.356389e-05
+##  [2,] 3.425640e-05 2.898446e-05
+##  [3,] 4.901039e-05 4.837751e-05
+##  [4,] 5.014937e-05 4.125084e-05
+##  [5,] 7.094048e-05 6.088431e-05
+##  [6,] 3.509013e-05 5.179175e-05
+##  [7,] 4.262751e-05 2.656200e-05
+##  [8,] 3.703294e-05 4.138978e-05
+##  [9,] 5.362472e-05 6.034266e-05
+## [10,] 6.176724e-05 7.223582e-05
+## [11,] 4.917107e-05 4.779259e-05
+## [12,] 3.153064e-05 3.442331e-05
+## [13,] 4.791875e-05 5.570411e-05
+## [14,] 2.932673e-05 1.732530e-05
+## [15,] 4.340738e-05 4.348431e-05
+## [16,] 3.046085e-05 2.150926e-05
+## [17,] 2.811872e-05 2.647327e-05
+## [18,] 4.795274e-05 4.119693e-05
+## [19,] 6.140995e-05 3.971909e-05
+## [20,] 3.760746e-05 4.469139e-05
+## [21,] 3.926768e-05 4.189408e-05
+## [22,] 2.485398e-05 1.725360e-05
+## [23,] 4.484437e-05 4.199973e-05
+## [24,] 5.339394e-05 2.967968e-05
+## [25,] 2.669801e-05 3.098431e-05
+## [26,] 2.056666e-04 6.267287e-05
+## [27,] 6.267287e-05 1.031629e-04
+\end{verbatim}
+
+\end{document}

@@ -1,0 +1,97 @@
+---
+title: "Model 1"
+output: html_document
+date: "2024-01-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Data Preprocessing
+
+## Load the required packages
+```{r}
+library(quantmod)
+library(tidyverse)
+library(Hmisc)
+library(moments)
+library(reshape2)
+library(fGarch)
+library(keras)
+library(tensorflow)
+```
+
+## Define the stock symbol and date range
+```{r}
+tickers <- c("AAPL", "AMGN", "AXP", "BA", "CAT", "CRM", "CSCO", "CVX", "DIS", "DOW",
+            "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM",
+            "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "V", "VZ", "WBA", "WMT")
+start_date <- as.Date("2000-01-01")
+end_date <- as.Date("2020-12-31")
+```
+
+## Fetch the stock prices
+```{r}
+closing_prices <- lapply(tickers, function(ticker) {
+  getSymbols(ticker, src = 'yahoo', from = start_date, to = end_date, auto.assign = FALSE)[,6]
+})
+
+closing_prices <- as_tibble(do.call(cbind, closing_prices))
+
+date <- index(getSymbols("AAPL", src = 'yahoo', from = start_date, to = end_date, auto.assign = FALSE))
+closing_prices <- cbind(date, closing_prices)
+
+# Remove columns with NA & clean column names
+closing_prices <- closing_prices[ , colSums(is.na(closing_prices))==0]
+
+names(closing_prices)[-1] <- substr(names(closing_prices)[-1], 1, nchar(names(closing_prices)[-1]) - 9)
+
+# Calculate daily returns
+daily_returns <- closing_prices %>%
+  mutate_at(vars(-1), ~log(.) - log(lag(.))) %>%
+  na.omit()
+
+days <- nrow(daily_returns)
+
+daily_returns_long <- pivot_longer(daily_returns, cols = -1, names_to = "ticker", values_to = "returns")
+```
+
+# LSTM
+
+## Try training LSTM by following online tutorial
+```{r}
+data <- c(113,  55,  77, 114,  73,  72,  75, 135,  84,  66, 167, 93,  83, 
+          164,  76,  97, 148,  74,  76, 173,  70,  86, 167,  37,   1,  49,  
+          48,37, 117, 178, 167, 177, 295, 167, 224, 225, 198, 217, 220, 175, 
+          360, 289, 209, 369, 287, 249, 336, 219, 288, 248, 370, 296, 337, 
+          246, 377, 324, 288, 367, 309, 128, 382, 266, 286, 230)
+
+X_train = [55,6,1] # 6 timesteps (t-6,t-5,t-4,t-3,t-2,t-1)
+Y_train = [55,3,1] # forecast horizon (t+1,t+2,t+3)
+X_test  = [1,6,1]  
+Y_test  = [1,3,1]
+
+model <- keras_model_sequential()
+
+model %>%
+  layer_lstm(
+              units = 32, 
+              batch_input_shape  = c(1, 6, 1),
+              dropout = 0.2,
+              recurrent_dropout = 0.2,
+              return_sequences = TRUE
+  ) %>% time_distributed(layer_dense(units = 1))
+
+  model %>%
+      compile(loss = FLAGS$loss, optimizer = optimizer, metrics = 
+              list("mean_squared_error"))
+
+  history <- model %>% fit(x = X_train,
+                           y = Y_train,
+                           batch_size = 1,
+                           epochs = 100,
+                           callbacks = callbacks)
+```
+
+## Try training LSTM between AAPL and AMGN

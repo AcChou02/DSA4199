@@ -1,0 +1,147 @@
+---
+title: "Model 1"
+output: html_document
+date: "2023-12-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Data Preprocessing
+
+## Load the required packages
+```{r}
+library(quantmod)
+library(tidyverse)
+library(Hmisc)
+library(moments)
+library(reshape2)
+library(fGarch)
+```
+
+## Define the stock symbol and date range
+```{r}
+tickers <- c("AAPL", "AMGN", "AXP", "BA", "CAT", "CRM", "CSCO", "CVX", "DIS", "DOW",
+            "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM",
+            "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "V", "VZ", "WBA", "WMT")
+start_date <- as.Date("2000-01-01")
+end_date <- as.Date("2020-12-31")
+```
+
+## Fetch the stock prices
+```{r}
+closing_prices <- lapply(tickers, function(ticker) {
+  getSymbols(ticker, src = 'yahoo', from = start_date, to = end_date, auto.assign = FALSE)[,6]
+})
+
+closing_prices <- as_tibble(do.call(cbind, closing_prices))
+
+date <- index(getSymbols("AAPL", src = 'yahoo', from = start_date, to = end_date, auto.assign = FALSE))
+closing_prices <- cbind(date, closing_prices)
+
+# Remove columns with NA & clean column names
+closing_prices <- closing_prices[ , colSums(is.na(closing_prices))==0]
+
+names(closing_prices)[-1] <- substr(names(closing_prices)[-1], 1, nchar(names(closing_prices)[-1]) - 9)
+
+# Calculate daily returns
+daily_returns <- closing_prices %>%
+  mutate_at(vars(-1), ~log(.) - log(lag(.))) %>%
+  na.omit()
+
+days <- nrow(daily_returns)
+
+daily_returns_long <- pivot_longer(daily_returns, cols = -1, names_to = "ticker", values_to = "returns")
+```
+
+## Fit Individual $Garch(1, 1)$ Models
+```{r}
+fit <- garchFit(data = daily_returns$AAPL[1:2000])
+pred <- predict(fit, n.ahead = 10)
+```
+
+## Helper functions
+```{r}
+# function to fetch the correlation matrix given start and end dates
+get_cor_mat <- function(data, start_date, end_date) {
+  tmp <- data %>% filter(date >= start_date, date <= end_date)
+  return(cor(tmp[, -1]))
+}
+
+# function to get 1-ahead prediction of standard deviation given start and end dates and ticker
+get_volatility <- function(data_long, stock, start_date, end_date) {
+  tmp <- data_long %>% filter(date >= start_date, date <= end_date, ticker == stock)
+  fit <- garchFit(formula = ~ garch(1, 1), data = tmp$returns, trace = FALSE)
+  pred <- predict(fit, n.ahead = 1)$standardDeviation[1]
+  return(pred)
+}
+
+start_date <- as.Date("2000-01-01")
+end_date <- as.Date("2006-12-31")
+
+# vectorize function
+get_volatility <- Vectorize(get_volatility, "stock")
+get_volatility(daily_returns_long, unique(daily_returns_long$ticker), start_date, end_date)
+```
+
+# Model 1
+```{r}
+# calculates the covariance matrix using model 1
+model_1 <- function(df, start_date, end_date) {
+  df_long <- pivot_longer(df, cols = -1, names_to = "ticker", values_to = "returns")
+  A <- diag(get_volatility(df_long, unique(df_long$ticker), start_date, end_date))
+  R <- get_cor_mat(df, start_date, end_date)
+  covariance_matrix <- A %*% R %*% A
+  
+  colnames(covariance_matrix) <- unique(df_long$ticker)
+  rownames(covariance_matrix) <- unique(df_long$ticker)
+  covariance_matrix_long <- melt(covariance_matrix)
+  colnames(covariance_matrix_long)[3] <- "mode1_1_predicted_value"
+  date <- rep(end_date, nrow(covariance_matrix_long))
+  covariance_matrix_long <- cbind(date, covariance_matrix_long)
+  return(covariance_matrix_long)
+}
+
+v <- model_1(daily_returns, start_date, end_date)
+```
+
+## Store Model 1 output for convenience
+```{r, eval=FALSE}
+dates <- daily_returns %>% 
+  filter(date >= "2001-01-01") %>% 
+  select(date) %>%
+  pull(1)
+
+dates_new <- daily_returns %>% 
+  filter(date >= "2013-03-07") %>% 
+  select(date) %>%
+  pull(1)
+
+model_1_results_new <- model_1(daily_returns, start_date, dates_new[1])
+for (d in dates_new[-1]) {
+  model_1_results_new <- rbind(model_1_results_new, model_1(daily_returns, start_date, d))
+}
+
+model_1_results <- rbind(model_1_results, model_1_results_new)
+
+write.csv(model_1_results, "model_1_results.csv")
+```
+
+
+```{r}
+# function to get fitted value of standard deviation given start and end dates and ticker
+get_volatility <- function(data_long, stock, start_date, end_date) {
+  tmp <- data_long %>% filter(date >= start_date, date <= end_date, ticker == stock)
+  fit <- garchFit(formula = ~ garch(1, 1), data = tmp$returns, trace = FALSE)
+  pred <- predict(fit, n.ahead = 1)$standardDeviation[1]
+  return(pred)
+}
+
+start_date <- as.Date("2000-01-01")
+end_date <- as.Date("2006-12-31")
+
+# vectorize function
+get_volatility <- Vectorize(get_volatility, "stock")
+get_volatility(daily_returns_long, unique(daily_returns_long$ticker), start_date, end_date)
+```

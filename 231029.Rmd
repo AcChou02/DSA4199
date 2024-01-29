@@ -1,0 +1,112 @@
+---
+title: "Data Exploration on the Returns of 27 Stocks"
+output: pdf_document
+date: "2023-10-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Data Preprocessing
+
+## Load the required packages
+```{r}
+library(quantmod)
+library(tidyverse)
+library(Hmisc)
+library(moments)
+library(reshape2)
+library(fGarch)
+```
+
+## Define the stock symbol and date range
+```{r}
+tickers <- c("AAPL", "AMGN", "AXP", "BA", "CAT", "CRM", "CSCO", "CVX", "DIS", "DOW",
+            "GS", "HD", "HON", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM",
+            "MRK", "MSFT", "NKE", "PG", "TRV", "UNH", "V", "VZ", "WBA", "WMT")
+start_date <- as.Date("2000-01-01")
+end_date <- as.Date("2020-12-31")
+```
+
+## Fetch the stock prices
+```{r}
+closing_prices <- lapply(tickers, function(ticker) {
+  getSymbols(ticker, src = 'yahoo', from = start_date, to = end_date, auto.assign = FALSE)[,6]
+})
+
+closing_prices <- as_tibble(do.call(cbind, closing_prices))
+
+date <- index(getSymbols("AAPL", src = 'yahoo', from = start_date, to = end_date, auto.assign = FALSE))
+closing_prices <- cbind(date, closing_prices)
+
+# Remove columns with NA & clean column names
+closing_prices <- closing_prices[ , colSums(is.na(closing_prices))==0]
+
+names(closing_prices)[-1] <- substr(names(closing_prices)[-1], 1, nchar(names(closing_prices)[-1]) - 9)
+
+# Calculate daily returns
+daily_returns <- closing_prices %>%
+  mutate_at(vars(-1), ~log(.) - log(lag(.))) %>%
+  na.omit()
+
+days <- nrow(daily_returns)
+
+daily_returns_long <- pivot_longer(daily_returns, cols = -1, names_to = "ticker", values_to = "returns")
+```
+
+# Exploratory Data Analysis
+
+## First Four Moments
+```{r}
+ggplot(daily_returns_long, aes(x = reorder(ticker, -returns), y = returns)) +
+  geom_bar(stat = "summary", fun = "mean") +
+  labs(title = "Mean of Tickers in daily_returns_long", x = "Ticker", y = "Mean Returns") + 
+  stat_summary(fun.data = mean_sdl, geom = "errorbar", width = .5, fun.args = list(mult = 1/sqrt(days))) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))
+```
+
+```{r}
+returns_moments <- daily_returns_long %>%
+  group_by(ticker) %>%
+  summarise(mean = mean(returns),
+            sd = sd(returns),
+            skewness = skewness(returns),
+            kurtosis = kurtosis(returns))
+
+ggplot(returns_moments, aes(x = reorder(ticker, -sd), y = sd)) +
+  geom_col() +
+  labs(title = "Daily Volatility of Tickers in daily_returns_long", x = "Ticker", y = "Daily Volatility") +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))
+
+ggplot(returns_moments, aes(x = reorder(ticker, -skewness), y = skewness)) +
+  geom_col() +
+  labs(title = "Skewness of Tickers in daily_returns_long", x = "Ticker", y = "Skewness") +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))
+
+ggplot(returns_moments, aes(x = reorder(ticker, -kurtosis), y = kurtosis)) +
+  geom_col() +
+  labs(title = "Kurtosis of Tickers in daily_returns_long", x = "Ticker", y = "Kurtosis") +
+  geom_abline(aes(slope = 0, intercept = 3, color = "red")) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))
+```
+
+## Correlation between returns
+```{r}
+# Calculate correlation matrix
+cor_matrix <- cor(daily_returns[, -1])
+
+# Reorder rows and columns by hierarchical clustering
+hc_rows <- hclust(as.dist(1 - cor_matrix))
+hc_cols <- hclust(as.dist(1 - t(cor_matrix)))
+cor_matrix_reordered <- cor_matrix[hc_rows$order, hc_cols$order]
+
+# Create heatmap
+ggplot(melt(cor_matrix_reordered), aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  labs(title = "Correlation Heatmap of Tickers in daily_returns_long", x = "Ticker", y = "Ticker") +
+  geom_text(aes(label=round(value*100))) + 
+  guides(fill = "none")
+```

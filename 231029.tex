@@ -1,0 +1,263 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Data Exploration on the Returns of 27 Stocks},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Data Exploration on the Returns of 27 Stocks}
+\author{}
+\date{\vspace{-2.5em}2023-10-29}
+
+\begin{document}
+\maketitle
+
+\hypertarget{data-preprocessing}{%
+\section{Data Preprocessing}\label{data-preprocessing}}
+
+\hypertarget{load-the-required-packages}{%
+\subsection{Load the required
+packages}\label{load-the-required-packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(quantmod)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(Hmisc)}
+\FunctionTok{library}\NormalTok{(moments)}
+\FunctionTok{library}\NormalTok{(reshape2)}
+\FunctionTok{library}\NormalTok{(fGarch)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{define-the-stock-symbol-and-date-range}{%
+\subsection{Define the stock symbol and date
+range}\label{define-the-stock-symbol-and-date-range}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tickers }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"AAPL"}\NormalTok{, }\StringTok{"AMGN"}\NormalTok{, }\StringTok{"AXP"}\NormalTok{, }\StringTok{"BA"}\NormalTok{, }\StringTok{"CAT"}\NormalTok{, }\StringTok{"CRM"}\NormalTok{, }\StringTok{"CSCO"}\NormalTok{, }\StringTok{"CVX"}\NormalTok{, }\StringTok{"DIS"}\NormalTok{, }\StringTok{"DOW"}\NormalTok{,}
+            \StringTok{"GS"}\NormalTok{, }\StringTok{"HD"}\NormalTok{, }\StringTok{"HON"}\NormalTok{, }\StringTok{"IBM"}\NormalTok{, }\StringTok{"INTC"}\NormalTok{, }\StringTok{"JNJ"}\NormalTok{, }\StringTok{"JPM"}\NormalTok{, }\StringTok{"KO"}\NormalTok{, }\StringTok{"MCD"}\NormalTok{, }\StringTok{"MMM"}\NormalTok{,}
+            \StringTok{"MRK"}\NormalTok{, }\StringTok{"MSFT"}\NormalTok{, }\StringTok{"NKE"}\NormalTok{, }\StringTok{"PG"}\NormalTok{, }\StringTok{"TRV"}\NormalTok{, }\StringTok{"UNH"}\NormalTok{, }\StringTok{"V"}\NormalTok{, }\StringTok{"VZ"}\NormalTok{, }\StringTok{"WBA"}\NormalTok{, }\StringTok{"WMT"}\NormalTok{)}
+\NormalTok{start\_date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2000{-}01{-}01"}\NormalTok{)}
+\NormalTok{end\_date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2020{-}12{-}31"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fetch-the-stock-prices}{%
+\subsection{Fetch the stock prices}\label{fetch-the-stock-prices}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(tickers, }\ControlFlowTok{function}\NormalTok{(ticker) \{}
+  \FunctionTok{getSymbols}\NormalTok{(ticker, }\AttributeTok{src =} \StringTok{\textquotesingle{}yahoo\textquotesingle{}}\NormalTok{, }\AttributeTok{from =}\NormalTok{ start\_date, }\AttributeTok{to =}\NormalTok{ end\_date, }\AttributeTok{auto.assign =} \ConstantTok{FALSE}\NormalTok{)[,}\DecValTok{6}\NormalTok{]}
+\NormalTok{\})}
+
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}} \FunctionTok{as\_tibble}\NormalTok{(}\FunctionTok{do.call}\NormalTok{(cbind, closing\_prices))}
+
+\NormalTok{date }\OtherTok{\textless{}{-}} \FunctionTok{index}\NormalTok{(}\FunctionTok{getSymbols}\NormalTok{(}\StringTok{"AAPL"}\NormalTok{, }\AttributeTok{src =} \StringTok{\textquotesingle{}yahoo\textquotesingle{}}\NormalTok{, }\AttributeTok{from =}\NormalTok{ start\_date, }\AttributeTok{to =}\NormalTok{ end\_date, }\AttributeTok{auto.assign =} \ConstantTok{FALSE}\NormalTok{))}
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(date, closing\_prices)}
+
+\CommentTok{\# Remove columns with NA \& clean column names}
+\NormalTok{closing\_prices }\OtherTok{\textless{}{-}}\NormalTok{ closing\_prices[ , }\FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(closing\_prices))}\SpecialCharTok{==}\DecValTok{0}\NormalTok{]}
+
+\FunctionTok{names}\NormalTok{(closing\_prices)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{substr}\NormalTok{(}\FunctionTok{names}\NormalTok{(closing\_prices)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{], }\DecValTok{1}\NormalTok{, }\FunctionTok{nchar}\NormalTok{(}\FunctionTok{names}\NormalTok{(closing\_prices)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \DecValTok{9}\NormalTok{)}
+
+\CommentTok{\# Calculate daily returns}
+\NormalTok{daily\_returns }\OtherTok{\textless{}{-}}\NormalTok{ closing\_prices }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{), }\SpecialCharTok{\textasciitilde{}}\FunctionTok{log}\NormalTok{(.) }\SpecialCharTok{{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{lag}\NormalTok{(.))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{na.omit}\NormalTok{()}
+
+\NormalTok{days }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(daily\_returns)}
+
+\NormalTok{daily\_returns\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(daily\_returns, }\AttributeTok{cols =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{names\_to =} \StringTok{"ticker"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"returns"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{exploratory-data-analysis}{%
+\section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+
+\hypertarget{first-four-moments}{%
+\subsection{First Four Moments}\label{first-four-moments}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(daily\_returns\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(ticker, }\SpecialCharTok{{-}}\NormalTok{returns), }\AttributeTok{y =}\NormalTok{ returns)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"summary"}\NormalTok{, }\AttributeTok{fun =} \StringTok{"mean"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Mean of Tickers in daily\_returns\_long"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Ticker"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Mean Returns"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun.data =}\NormalTok{ mean\_sdl, }\AttributeTok{geom =} \StringTok{"errorbar"}\NormalTok{, }\AttributeTok{width =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\AttributeTok{fun.args =} \FunctionTok{list}\NormalTok{(}\AttributeTok{mult =} \DecValTok{1}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(days))) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{guide =} \FunctionTok{guide\_axis}\NormalTok{(}\AttributeTok{n.dodge=}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{231029_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{returns\_moments }\OtherTok{\textless{}{-}}\NormalTok{ daily\_returns\_long }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(ticker) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(returns),}
+            \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(returns),}
+            \AttributeTok{skewness =} \FunctionTok{skewness}\NormalTok{(returns),}
+            \AttributeTok{kurtosis =} \FunctionTok{kurtosis}\NormalTok{(returns))}
+
+\FunctionTok{ggplot}\NormalTok{(returns\_moments, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(ticker, }\SpecialCharTok{{-}}\NormalTok{sd), }\AttributeTok{y =}\NormalTok{ sd)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Daily Volatility of Tickers in daily\_returns\_long"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Ticker"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Daily Volatility"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{guide =} \FunctionTok{guide\_axis}\NormalTok{(}\AttributeTok{n.dodge=}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{231029_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(returns\_moments, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(ticker, }\SpecialCharTok{{-}}\NormalTok{skewness), }\AttributeTok{y =}\NormalTok{ skewness)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Skewness of Tickers in daily\_returns\_long"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Ticker"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Skewness"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{guide =} \FunctionTok{guide\_axis}\NormalTok{(}\AttributeTok{n.dodge=}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{231029_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(returns\_moments, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(ticker, }\SpecialCharTok{{-}}\NormalTok{kurtosis), }\AttributeTok{y =}\NormalTok{ kurtosis)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Kurtosis of Tickers in daily\_returns\_long"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Ticker"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Kurtosis"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{slope =} \DecValTok{0}\NormalTok{, }\AttributeTok{intercept =} \DecValTok{3}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{guide =} \FunctionTok{guide\_axis}\NormalTok{(}\AttributeTok{n.dodge=}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{231029_files/figure-latex/unnamed-chunk-5-3.pdf}
+
+\hypertarget{correlation-between-returns}{%
+\subsection{Correlation between
+returns}\label{correlation-between-returns}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate correlation matrix}
+\NormalTok{cor\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(daily\_returns[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{])}
+
+\CommentTok{\# Reorder rows and columns by hierarchical clustering}
+\NormalTok{hc\_rows }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(}\FunctionTok{as.dist}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ cor\_matrix))}
+\NormalTok{hc\_cols }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(}\FunctionTok{as.dist}\NormalTok{(}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{t}\NormalTok{(cor\_matrix)))}
+\NormalTok{cor\_matrix\_reordered }\OtherTok{\textless{}{-}}\NormalTok{ cor\_matrix[hc\_rows}\SpecialCharTok{$}\NormalTok{order, hc\_cols}\SpecialCharTok{$}\NormalTok{order]}
+
+\CommentTok{\# Create heatmap}
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{melt}\NormalTok{(cor\_matrix\_reordered), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Var1, }\AttributeTok{y =}\NormalTok{ Var2, }\AttributeTok{fill =}\NormalTok{ value)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient2}\NormalTok{(}\AttributeTok{low =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{mid =} \StringTok{"white"}\NormalTok{, }\AttributeTok{high =} \StringTok{"red"}\NormalTok{, }\AttributeTok{midpoint =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{hjust=}\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Correlation Heatmap of Tickers in daily\_returns\_long"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Ticker"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Ticker"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label=}\FunctionTok{round}\NormalTok{(value}\SpecialCharTok{*}\DecValTok{100}\NormalTok{))) }\SpecialCharTok{+} 
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{231029_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\end{document}
